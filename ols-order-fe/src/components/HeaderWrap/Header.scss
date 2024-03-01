@@ -13,11 +13,13 @@
 // navbar - top - inner
 .navbarTop-inner,
 .navbarBotton-inner {
-    position: relative;
     min-width: 32rem;
     max-width: 120rem;
-    padding: 0 1.6rem;
-    margin: 0 auto;
+    padding-right: 1.6rem;
+    padding-left: 1.6rem;
+    margin-right: auto;
+    margin-left: auto;
+    overflow: hidden;
 }
 
 .navbarBotton-inner {
@@ -46,11 +48,8 @@
 
 .nav-search {
     width: 100%;
-    display: flex;
-    position: relative;
+    min-height: 35px;
     border: 1.2px solid $clr-light-gray;
-    padding: 6px;
-
     input {
         flex: 1;
         height: 100%;
@@ -60,11 +59,15 @@
         outline: none;
         font-size: 1.4rem;
         font-family: $fnt-base;
-        padding-right: 6px;
+        padding-left: 6px;
     }
 
     &:focus-within {
         border-color: $clr-primary;
+    }
+    .search-btn {
+        min-height: 33px;
+        padding: 0 6px;
     }
 
     .search-img {

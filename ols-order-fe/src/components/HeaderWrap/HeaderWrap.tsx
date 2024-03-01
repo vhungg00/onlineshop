@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { iconCart, iconLogoOls, iconMenu, iconSearch } from '~/images';
 import { ScreenUrlPath } from '@/typings/ScreenUrlPath';
@@ -13,6 +13,13 @@ export const HeaderWrapComponent: React.FC = () => {
       name: 'hoi'
     }
   ];
+
+  useEffect(() => {
+    const rootOverlay = document.createElement('div');
+    rootOverlay.setAttribute('class', 'Overlay');
+    document.body.append(rootOverlay)
+      },[])
+
   return (
     <nav className="navbar">
       <div className="navbar-content">
