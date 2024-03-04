@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { iconCart, iconLogoOls, iconMenu, iconSearch } from '~/images';
+import { iconCart, iconLogoOls, iconMenu, iconSearch, iconCloseMenu } from '~/images';
 import { ScreenUrlPath } from '@/typings/ScreenUrlPath';
 
 import './Header.scss';
 
 export const HeaderWrapComponent: React.FC = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+
   const categories = [
     {
       id: '001',
@@ -14,18 +15,35 @@ export const HeaderWrapComponent: React.FC = () => {
     }
   ];
 
+  const openMenu = useCallback(() => {
+    setIsSidebarOpen(true);
+  }, []);
+
+  const closeMenu = useCallback(() => {
+    setIsSidebarOpen(false);
+  }, []);
+
+  const handleStopPropagation = (event: React.FormEvent<EventTarget>) => {
+    event.stopPropagation();
+  };
+
   useEffect(() => {
     const rootOverlay = document.createElement('div');
-    rootOverlay.setAttribute('class', 'Overlay');
-    document.body.append(rootOverlay)
-      },[])
+    if (isSidebarOpen) {
+      rootOverlay.setAttribute('class', 'RootOverlay');
+      document.body.append(rootOverlay);
+    } else {
+      const rootOverlay = document.querySelector('.RootOverlay');
+      rootOverlay?.remove();
+    }
+  }, [isSidebarOpen])
 
   return (
     <nav className="navbar">
       <div className="navbar-content">
         <div className="navbar-top">
           <div className="navbarTop-inner flex flex-between flex-center">
-            <button type="button" className="nav-open-mobile">
+            <button type="button" className="nav-open-mobile" onClick={openMenu}>
               <img src={iconMenu} alt="img-onlineshop" className="img-menu-mobile" />
             </button>
             <div className="navbarTop-left flex">
@@ -60,21 +78,28 @@ export const HeaderWrapComponent: React.FC = () => {
         <div className="navbar-bottom bg-light-gray">
           <div className="navbarBotton-inner flex flex-between">
             <div className="navbarBotton-left">
-              <ul className={`nav-links flex ${isSidebarOpen ? 'show-nav-links' : ''}`}>
-                <button type="button" className="navbar-hide-btn text-white" onClick={() => setIsSidebarOpen(false)}>
-                  <i className="fas fa-times"></i>
-                </button>
-                {categories.map((category) => (
-                  <li key={category.id}>
-                    <Link
-                      to={`/category/${category.id}`}
-                      className="nav-link text-white"
-                      onClick={() => setIsSidebarOpen(false)}
-                    >
-                      {category.name}
-                    </Link>
-                  </li>
-                ))}
+              <ul className={`nav-links ${isSidebarOpen ? 'menuOpen' : 'menuClose'}`} onClick={closeMenu}>
+                <div className={`nav-links-inner ${isSidebarOpen ? "nav-links-open" : "nav-links-close"}`} onClick={(event) => handleStopPropagation(event)}>
+                  <div className="nav-menu-header">
+                    <a href="#" className="nav-close-mobile" onClick={closeMenu}>
+                      <span className="iconElem">
+                        <img src={iconCloseMenu} alt="close-menu-mobile" className="" />
+                      </span>
+                    </a>
+                    <div className="searchContent">a</div>
+                  </div>
+                  {categories.map((category) => (
+                    <li key={category.id}>
+                      <Link
+                        to={`/category/${category.id}`}
+                        className="nav-link text-white"
+                        onClick={() => setIsSidebarOpen(false)}
+                      >
+                        {category.name}
+                      </Link>
+                    </li>
+                  ))}
+                </div>
               </ul>
             </div>
 

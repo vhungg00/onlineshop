@@ -5,5 +5,5 @@ export const ScreenUrlPath = {
   AllProduct: 'sp',
   Blog: '/blog',
   Contact: '/lien-he',
-  Cart: 'gio-hangf'
+  Cart: 'gio-hang'
 } as const;
