@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { iconCart, iconLogoOls, iconMenu, iconSearch, iconCloseMenu } from '~/images';
 import { ScreenUrlPath } from '@/typings/ScreenUrlPath';
+import { Accordion } from '@/components/Accordion';
 
 import './Header.scss';
 
