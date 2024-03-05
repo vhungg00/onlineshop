@@ -153,15 +153,6 @@
 
 @include mediumDeviceSize {
 
-    .nav-links {
-        display: block;
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-    }
-    
-
     .nav-link li {
         margin-bottom: 10px !important;
         border-bottom: 0.5px solid rgba(0, 0, 0, 0.05);
@@ -172,15 +163,24 @@
         }
     }
 
-    .RootOverlay {
+    .nav-links {
+        display: none;
         position: fixed;
         top: 0;
         right: 0;
         bottom: 0;
         left: 0;
         background-color: $clr-rgba;
-      
-      }
+    }
+
+    .nav-links.menuOpen {
+        display: block;
+    }
+
+    .nav-links.menuClose {
+        animation: slideRightClose ease 0.4s;
+    }
+
     .nav-links-inner {
         position: relative;
         right: 100%;
@@ -189,24 +189,12 @@
         height: 100%;
         backface-visibility: hidden;
         background-color: $clr-white;
-        animation-name: slideRightClose;
+        animation-name: slider;
         animation-duration: 400ms;
         animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
-    .nav-links-inner.nav-links-open {
-        right: 0;
-        display: block;
-        animation-name: slideRight;
-        animation-duration: 400ms;
-        animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-
-    .nav-links-inner.nav-links-close {
-        display: none;
-    }
-
-    .nav-links-inners {
+    .nav-links-inner {
         position: relative;
         right: 0;
         max-width: 338px;
@@ -271,25 +259,24 @@
 
 @keyframes slideRight {
     from {
-        display: none;
-        right: 100%;
+        transform: translateX(-338px);
+        opacity: 0.6;
     }
 
     to {
-        display: block;
-        ;
-        right: 0;
+        transform: translateX(0);
+        opacity: 1;
     }
 }
 
 @keyframes slideRightClose {
-    0% {
-        display: block;
-        right: 0;
+    from {
+        transform: translateX(0);
+        opacity: 1;
     }
-
-    100% {
-        display: none;
-        right: 100%;
+    to {
+        transform: translateX(-338px);
+        opacity: 0;
+        ;
     }
 }

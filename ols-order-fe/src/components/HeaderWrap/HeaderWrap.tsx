@@ -27,17 +27,6 @@ export const HeaderWrapComponent: React.FC = () => {
     event.stopPropagation();
   };
 
-  useEffect(() => {
-    const rootOverlay = document.createElement('div');
-    if (isSidebarOpen) {
-      rootOverlay.setAttribute('class', 'RootOverlay');
-      document.body.append(rootOverlay);
-    } else {
-      const rootOverlay = document.querySelector('.RootOverlay');
-      rootOverlay?.remove();
-    }
-  }, [isSidebarOpen])
-
   return (
     <nav className="navbar">
       <div className="navbar-content">
@@ -79,7 +68,7 @@ export const HeaderWrapComponent: React.FC = () => {
           <div className="navbarBotton-inner flex flex-between">
             <div className="navbarBotton-left">
               <ul className={`nav-links ${isSidebarOpen ? 'menuOpen' : 'menuClose'}`} onClick={closeMenu}>
-                <div className={`nav-links-inner ${isSidebarOpen ? "nav-links-open" : "nav-links-close"}`} onClick={(event) => handleStopPropagation(event)}>
+                <div className="nav-links-inner" onClick={(event) => handleStopPropagation(event)}>
                   <div className="nav-menu-header">
                     <a href="#" className="nav-close-mobile" onClick={closeMenu}>
                       <span className="iconElem">
