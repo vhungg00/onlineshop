@@ -1,17 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from '@/App';
+import { HelmetProvider } from 'react-helmet-async';
 import reportWebVitals from './reportWebVitals';
 import '@fontsource/poppins';
 import '@fontsource/poppins/400.css';
 import '@fontsource/poppins/400-italic.css';
 import '@fontsource/poppins/600.css';
 import '@fontsource/poppins/700.css';
-import './styles/GlobalStyles.scss';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <HelmetProvider>
+      <App />
+    </HelmetProvider>
   </React.StrictMode>,
   document.getElementById('root') as HTMLElement
 );

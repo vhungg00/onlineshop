@@ -1,0 +1,14 @@
+@import '@/styles/GlobalStyles.scss';
+
+.headingLv3 {
+    padding-left: 1rem;
+    line-height: 1.4;
+    color: $clr-navigation;
+    border-left: 4px solid $clr-primary;
+    margin-bottom: 1.6rem;
+
+}
+.title {
+    padding: .5rem .4rem;
+    font-size: 1.6rem;
+}
